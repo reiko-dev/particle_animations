@@ -31,7 +31,7 @@ class ParticleFieldPainter extends CustomPainter {
             translateX: o.x,
             translateY: o.y,
             rotation: 0,
-            scale: o.life,
+            scale: 1 * o.life,
             anchorX: 0,
             anchorY: 0),
       );

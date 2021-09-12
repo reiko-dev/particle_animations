@@ -25,12 +25,11 @@ class SpriteSheet {
     stream.addListener(listener);
   }
 
+  // Given a frame index, return the rect that describes that frame in the image.
   Rect getFrame(int index) {
-    // Given a frame index, return the rect that describes that frame in the image.
-
     assert(
       image != null || index >= 0 || index < length,
-      'Error when getting the frame of the sprite.',
+      'Error when getting a sprite frame.',
     );
 
     int cols = (image!.width / frameWidth).floor();

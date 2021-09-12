@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:vignettes_animations/particle_field.dart';
-import 'package:vignettes_animations/particle_field_painter.dart';
+import 'package:vignettes_animations/particles/particle_field.dart';
+import 'package:vignettes_animations/particles/particle_field_painter.dart';
 import 'package:vignettes_animations/sprite_sheet.dart';
 
 class ParticleSwipeDemo extends StatefulWidget {
@@ -65,10 +65,18 @@ class ParticleSwipeDemoState extends State<ParticleSwipeDemo>
           child: const DemoItem(color: Colors.blue),
         ),
 
+        Positioned(
+          top: size.height * .5,
+          width: size.width * .8,
+          height: size.height * .1,
+          child: const DemoItem(color: Colors.green),
+        ),
+
         Positioned.fill(
           child: IgnorePointer(
             child: RepaintBoundary(
               child: CustomPaint(
+                willChange: true,
                 painter: ParticleFieldPainter(
                     field: particleField, spriteSheet: _spriteSheet),
               ),

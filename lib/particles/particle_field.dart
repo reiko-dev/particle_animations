@@ -24,13 +24,15 @@ class ParticleField with ChangeNotifier {
     // Get item's render box, and use it to calculate the position for the particle effect:
     final RenderBox box = key.currentContext!.findRenderObject() as RenderBox;
 
-    Offset offset = box.localToGlobal(Offset.zero);
+    double height = Scaffold.of(context).appBarMaxHeight ?? 0;
+
+    Offset offset = box.localToGlobal(Offset(0, -height));
 
     final bounds = offset & box.size;
 
     // Delay the start of the effect a little bit, so the item is mostly closed before it begins.
     Future.delayed(const Duration(milliseconds: 100)).then((_) {
-      rectanglePerimeterExplosion(
+      perimeterExplosion(
         bounds,
         color: color,
       );
@@ -65,8 +67,8 @@ class ParticleField with ChangeNotifier {
     }
   }
 
-  // Creates the "favorite" effect: blue particles exploding out from a central point (like a firework)
-  void rectanglePerimeterExplosion(
+  // Creates the rectangle perimeter explosion
+  void perimeterExplosion(
     Rect bounds, {
     Color color = const Color(0xff54d8e6),
     int count = 55,
@@ -79,22 +81,22 @@ class ParticleField with ChangeNotifier {
     double perimeter = 2 * width + 2 * height;
     double distanceBetweenPoints = perimeter / count;
 
-    double x = bounds.left;
-    double y = bounds.top;
     final List<Offset> points = [];
 
+    //Adds horizontal particles.
     for (var i = 0; i < (width / distanceBetweenPoints); i++) {
-      double x1 = x + distanceBetweenPoints * i;
+      double x1 = bounds.left + distanceBetweenPoints * i;
 
       points.add(Offset(x1, bounds.top));
 
-      double x2 = x + width - distanceBetweenPoints * i;
+      double x2 = bounds.left + width - distanceBetweenPoints * i;
 
       points.add(Offset(x2, bounds.bottom));
     }
 
+    //Adds vertical particles.
     for (var i = 0; i < (height / distanceBetweenPoints); i++) {
-      double y1 = y + distanceBetweenPoints * i;
+      double y1 = bounds.top + distanceBetweenPoints * i;
 
       points.add(Offset(bounds.left, y1));
 
@@ -117,7 +119,7 @@ class ParticleField with ChangeNotifier {
           x: point.dx,
           y: point.dy,
           vx: i.isEven ? vel : -vel,
-          vy: 1.5 * -vel,
+          vy: 1.4 * -vel,
           life: rand + 0.3,
           color: color.withOpacity(.3 + (rand - .5)),
         ),
