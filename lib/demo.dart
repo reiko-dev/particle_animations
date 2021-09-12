@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:vignettes_animations/particles/particle_field.dart';
 import 'package:vignettes_animations/particles/particle_field_painter.dart';
-import 'package:vignettes_animations/sprite_sheet.dart';
+import 'package:vignettes_animations/particles/sprite_sheet.dart';
 
 class ParticleSwipeDemo extends StatefulWidget {
   const ParticleSwipeDemo({Key? key}) : super(key: key);

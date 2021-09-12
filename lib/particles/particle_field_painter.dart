@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vignettes_animations/sprite_sheet.dart';
+import 'package:vignettes_animations/particles/sprite_sheet.dart';
 
 import 'particle_field.dart';
 
